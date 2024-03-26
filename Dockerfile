@@ -11,15 +11,16 @@ RUN pacman -Suy --noconfirm --needed \
     ninja \
     curl \
     glu \
+    yay \
     && rm -f /var/cache/pacman/pkg/*
 
 ## yay
 RUN useradd builduser -m                                     
 RUN passwd -d builduser                                      
 RUN printf 'builduser ALL=(ALL) ALL\n' | tee -a /etc/sudoers 
-RUN sudo -u builduser bash -c 'cd ~ \
- && git clone https://aur.archlinux.org/yay.git \
- && cd yay && makepkg -si --noconfirm' 
+#RUN sudo -u builduser bash -c 'cd ~ \
+# && git clone https://aur.archlinux.org/yay.git \
+# && cd yay && makepkg -si --noconfirm' 
 
 RUN sudo -u builduser bash -c 'yay -Syy --noconfirm octomap' 
 
